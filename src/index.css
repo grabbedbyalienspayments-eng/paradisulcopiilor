@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Baloo+2:wght@400;500;600;700;800&display=swap&subset=latin,latin-ext');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Nunito', sans-serif;
+  }
+  body {
+    background-color: #FFFAF5;
+    color: #2D2010;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+
+  /* ── Touch interaction — keeps taps responsive ── */
+  button, [role="button"] {
+    touch-action: manipulation;
+    cursor: pointer;
+  }
+  a {
+    touch-action: manipulation;
+  }
+
+  /* ── Minimum tap target — ONLY actual buttons, not inline links ── */
+  button:not(.btn-icon):not(.btn-bare) {
+    min-height: 44px;
+  }
+
+  /* ── Input zoom prevention on iOS ── */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+@layer utilities {
+  /* ── Typography depth ── */
+  .text-shadow      { text-shadow: 0 2px 14px rgba(0,0,0,0.32); }
+  .text-shadow-sm   { text-shadow: 0 1px 5px rgba(0,0,0,0.18); }
+  .text-shadow-glow { text-shadow: 0 0 50px rgba(255,209,102,0.6), 0 2px 14px rgba(0,0,0,0.28); }
+  .text-shadow-warm { text-shadow: 0 4px 24px rgba(255,107,53,0.4), 0 1px 6px rgba(0,0,0,0.12); }
+  .text-outline-white  { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
+  .text-outline-orange { -webkit-text-stroke: 2px #FF6B35; color: transparent; }
+
+  /* ── Section organic transitions ── */
+  .wave-bottom::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 60px;
+    border-radius: 50% 50% 0 0;
+    background: white;
+  }
+  .section-pill-top    { border-top-left-radius: 48px; border-top-right-radius: 48px; }
+  .section-pill-bottom { border-bottom-left-radius: 48px; border-bottom-right-radius: 48px; }
+
+  /* ── Premium shadow tokens ── */
+  .shadow-warm-sm { box-shadow: 0 4px 20px rgba(255,107,53,0.14); }
+  .shadow-warm-md { box-shadow: 0 8px 36px rgba(255,107,53,0.22); }
+  .shadow-warm-lg { box-shadow: 0 16px 56px rgba(255,107,53,0.28); }
+  .shadow-warm-xl { box-shadow: 0 24px 80px rgba(255,107,53,0.32); }
+  .shadow-soft-md { box-shadow: 0 8px 36px rgba(0,0,0,0.08); }
+  .shadow-soft-lg { box-shadow: 0 16px 64px rgba(0,0,0,0.1); }
+
+  /* ── Grid texture bg ── */
+  .bg-grid-warm {
+    background-image: radial-gradient(circle, rgba(255,107,53,0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ── Honeypot hidden ── */
+  .hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+@keyframes float       { 0%,100%{ transform:translateY(0px) }  50%{ transform:translateY(-18px) } }
+@keyframes float-alt   { 0%,100%{ transform:translateY(0) rotate(0deg) } 50%{ transform:translateY(-12px) rotate(6deg) } }
+@keyframes float-x     { 0%,100%{ transform:translate(0,0) } 33%{ transform:translate(9px,-11px) } 66%{ transform:translate(-6px,-6px) } }
+@keyframes float-slow  { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-8px) } }
+@keyframes spin-slow   { from{ transform:rotate(0deg) }   to{ transform:rotate(360deg) } }
+@keyframes spin-reverse{ from{ transform:rotate(0deg) }   to{ transform:rotate(-360deg) } }
+@keyframes pulse-scale { 0%,100%{ transform:scale(1); opacity:1 }    50%{ transform:scale(1.2); opacity:0.7 } }
+@keyframes pulse-ring  { 0%{ box-shadow:0 0 0 0 rgba(255,209,102,0.5) } 70%{ box-shadow:0 0 0 16px rgba(255,209,102,0) } 100%{ box-shadow:0 0 0 0 rgba(255,209,102,0) } }
+@keyframes scale-in    { from{ opacity:0; transform:scale(0.88) }     to{ opacity:1; transform:scale(1) } }
+@keyframes fade-in     { from{ opacity:0 }                             to{ opacity:1 } }
+@keyframes slide-up    { from{ opacity:0; transform:translateY(30px) } to{ opacity:1; transform:translateY(0) } }
+@keyframes blur-in     { from{ opacity:0; filter:blur(10px) }          to{ opacity:1; filter:blur(0) } }
+@keyframes drift-right { 0%,100%{ transform:translateX(0) }            50%{ transform:translateX(12px) } }
+@keyframes glow-pulse  { 0%,100%{ box-shadow: 0 20px 60px rgba(255,107,53,0.35), 0 0 0 0 rgba(255,107,53,0); } 50%{ box-shadow: 0 28px 80px rgba(255,107,53,0.55), 0 0 48px rgba(255,107,53,0.22); } }
+@keyframes shimmer-x   { from{ transform: translateX(-100%) } to{ transform: translateX(200%) } }
+
+.animate-float        { animation: float        5s  ease-in-out infinite; will-change: transform; }
+.animate-float-alt    { animation: float-alt    7s  ease-in-out infinite; will-change: transform; }
+.animate-float-x      { animation: float-x      8s  ease-in-out infinite; will-change: transform; }
+.animate-float-slow   { animation: float-slow   9s  ease-in-out infinite; will-change: transform; }
+.animate-spin-slow    { animation: spin-slow    24s linear     infinite; will-change: transform; }
+.animate-spin-reverse { animation: spin-reverse 18s linear     infinite; will-change: transform; }
+.animate-pulse-scale  { animation: pulse-scale  2.5s ease-in-out infinite; }
+.animate-pulse-ring   { animation: pulse-ring   2.2s ease-in-out infinite; }
+.animate-scale-in     { animation: scale-in  0.7s ease          forwards; }
+.animate-fade-in      { animation: fade-in   1.2s ease          forwards; }
+.animate-slide-up     { animation: slide-up  0.9s ease          forwards; }
+.animate-blur-in      { animation: blur-in   0.8s ease          forwards; }
+.animate-drift-right  { animation: drift-right 6s  ease-in-out infinite; }
+.animate-glow-pulse   { animation: glow-pulse  3.5s ease-in-out infinite; }
+.animate-shimmer-x    { animation: shimmer-x   2.2s ease-in-out infinite; }
+
+/* =============================================
+   SCROLL REVEAL
+   ============================================= */
+.sr       { opacity:0; transform:translateY(40px); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+.sr-left  { opacity:0; transform:translateX(-48px); transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+.sr-right { opacity:0; transform:translateX(48px);  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+.sr-scale { opacity:0; transform:scale(.92);         transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1); }
+.sr-blur  { opacity:0; filter:blur(8px);             transition: opacity .8s ease, filter .8s ease; }
+
+.sr.sr-visible, .sr-left.sr-visible, .sr-right.sr-visible, .sr-scale.sr-visible {
+  opacity:1; transform:none;
+}
+.sr-blur.sr-visible { opacity:1; filter:blur(0); }
+
+.stagger-1 { transition-delay:  80ms !important; }
+.stagger-2 { transition-delay: 160ms !important; }
+.stagger-3 { transition-delay: 240ms !important; }
+.stagger-4 { transition-delay: 320ms !important; }
+
+/* =============================================
+   IMAGE ZOOM — GPU composited, desktop only
+   ============================================= */
+.img-zoom {
+  transition: transform 0.8s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+@media (hover: hover) {
+  .img-zoom:hover { transform: scale(1.06); }
+}
+
+/* =============================================
+   HOVER TRANSFORMS — disable on touch devices
+   ============================================= */
+@media (hover: none) {
+  /* Prevent hover stuck state on mobile */
+  [class*="hover:scale"],
+  [class*="hover:-translate"] {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* =============================================
+   REDUCED MOTION — ACCESSIBILITY
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+  /* Ensure scroll-revealed elements are visible */
+  .sr, .sr-left, .sr-right, .sr-scale, .sr-blur {
+    opacity:1    !important;
+    transform:none !important;
+    filter:none  !important;
+    transition:none !important;
+  }
+}
+
+/* =============================================
+   MOBILE OPTIMIZATIONS
+   ============================================= */
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+
+  /* Prevent horizontal overflow on any element */
+  .overflow-x-guard {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Timeline on small screen */
+  #o-zi .timeline-step-text {
+    font-size: 14px !important;
+  }
+
+  /* Gallery masonry single column spacing */
+  .gallery-item { margin-bottom: 12px; }
+}
+
+/* =============================================
+   PERFORMANCE
+   ============================================= */
+#galerie,
+#grupe,
+#taxe {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
+/* Compositing hint for animated elements */
+.animate-float,
+.animate-float-alt,
+.animate-float-slow,
+.animate-float-x,
+.animate-spin-slow,
+.animate-spin-reverse {
+  transform: translateZ(0);
+}
+
+/* Prevent layout shift during image load */
+img {
+  height: auto;
+}
+img[width][height] {
+  aspect-ratio: attr(width) / attr(height);
+}
